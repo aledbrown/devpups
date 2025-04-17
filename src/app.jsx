@@ -7,7 +7,9 @@ export function App() {
     <PageWrapper>
       <Container>
         <Header />
-        {/* more to come */}
+        <main>
+          {/* more to come */}
+        </main>
       </Container>
     </PageWrapper>
   );

@@ -1,3 +1,6 @@
 # React from scratch
+- https://laracasts.com/series/react-from-scratch/
+- https://github.com/laracasts/react-from-scratch/
 
-This repo contains the source code for each lesson of the React from Scratch Laracasts series. You'll find each lesson in its own branch named after the lesson number.
+
+> Dev Pups React app
