@@ -8,6 +8,7 @@ import { NewPuppyForm } from "./components/NewPuppyForm";
 
 import { puppies } from "./data/puppies";
 import { useState } from "react";
+import { Puppy } from "./types";
 
 export function App() {
   return (
@@ -23,7 +24,7 @@ export function App() {
 }
 
 function Main() {
-  const [liked, setLiked] = useState<number[]>([]);
+  const [liked, setLiked] = useState<Puppy['id'][]>([]);
   
   return (
     <main>

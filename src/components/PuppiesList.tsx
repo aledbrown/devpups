@@ -8,8 +8,8 @@ export function PuppiesList({
   setLiked,
 }: {
   puppies: Puppy[];
-  liked: number[];
-  setLiked: Dispatch<SetStateAction<number[]>>;
+  liked: Puppy['id'][];
+  setLiked: Dispatch<SetStateAction<Puppy['id'][]>>;
 }) {
   return (
     <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -27,8 +27,8 @@ export function PuppiesList({
 
 type PuppyCardProps = {
   puppy: Puppy;
-  liked: number[];
-  setLiked: Dispatch<SetStateAction<number[]>>;
+  liked: Puppy['id'][];
+  setLiked: Dispatch<SetStateAction<Puppy['id'][]>>;
 };
 
 function PuppyCard({ puppy, liked, setLiked }: PuppyCardProps) {
