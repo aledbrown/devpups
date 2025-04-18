@@ -24,7 +24,7 @@ export function App() {
 }
 
 function Main() {
-  const [liked, setLiked] = useState<Puppy["id"][]>([]);
+  const [liked, setLiked] = useState<Puppy['id'][]>([]);
   
   return (
     <main>
