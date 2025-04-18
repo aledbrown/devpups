@@ -25,7 +25,7 @@ export function App() {
 
 function Main() {
   const [liked, setLiked] = useState<Puppy['id'][]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('hello');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   
   return (
     <main>
