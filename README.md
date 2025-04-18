@@ -5,4 +5,7 @@
 # Useful stuff
 - https://transform.tools/html-to-jsx
 
+# Installed Bits
+- npm i lucide-react
+
 > Dev Pups React app
