@@ -35,25 +35,11 @@ type ShortlistProps = {
 };
 
 function ShortlistCard({ puppy, liked, setLiked }: ShortlistProps) {
-  function handleClick() {
-    setLiked((prevLiked) => {
-      return prevLiked.filter((id) => {
-        return id !== puppy.id;
-      });
-    });
-  }
-
   return (
     <li key={puppy.id} className="relative flex items-center overflow-clip rounded-md bg-white shadow-sm ring ring-black/5 transition duration-100 starting:scale-0 starting:opacity-0">
-      <img
-        height={32}
-        width={32}
-        alt={puppy.name}
-        className="aspect-square w-8 object-cover"
-        src={puppy.imagePath}
-      />
+      <img height={32} width={32} alt={puppy.name} className="aspect-square w-8 object-cover" src={puppy.imagePath}/>
       <p className="px-3 text-sm text-slate-800">{puppy.name}</p>
-      <button onClick={handleClick} className="group h-full border-l border-slate-100 px-2 hover:bg-slate-100">
+      <button onClick={() => setLiked(liked.filter((id) => id !== puppy.id))} className="group h-full border-l border-slate-100 px-2 hover:bg-slate-100">
         <X className="size-4 stroke-slate-400 group-hover:stroke-red-400" />
       </button>
     </li>
