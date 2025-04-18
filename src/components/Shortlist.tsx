@@ -21,12 +21,7 @@ export function Shortlist({
         {puppies
           .filter((puppy) => liked.includes(puppy.id))
           .map((puppy) => (
-            <ShortlistCard
-              key={puppy.id}
-              puppy={puppy}
-              liked={liked}
-              setLiked={setLiked}
-            />
+            <ShortlistCard key={puppy.id} puppy={puppy} liked={liked} setLiked={setLiked}/>
           ))}
       </ul>
     </div>
