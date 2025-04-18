@@ -1,16 +1,15 @@
 import { Heart } from "lucide-react";
-import * as React from "react";
+import { useState } from "react";
 
 export function LikeToggle() {
-  const [isLiked, setIsLiked] = React.useState(false);
-  
+  const [isLiked, setIsLiked] = useState(false);
   
   function handleClick() {
     setIsLiked(!isLiked);
   }
   
   return (
-    <button className="group" onClick={handleClick}>
+    <button className="group flex items-center gap-1" onClick={handleClick}>
       <Heart className={
         isLiked
           ? "fill-pink-500 stroke-none"
