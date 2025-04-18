@@ -1,6 +1,7 @@
-import React from "react";
 
-export function PuppiesList({ puppies }) {
+import type { Puppy } from "../types";
+
+export function PuppiesList({ puppies } : { puppies: Puppy[] }) {
   return (
     <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {puppies.map((puppy) => (
@@ -10,7 +11,11 @@ export function PuppiesList({ puppies }) {
   );
 }
 
-function PuppyCard({puppy}) {
+type PuppyCardProps = {
+  puppy: Puppy;
+};
+
+function PuppyCard({puppy}: PuppyCardProps) {
   return (
     <li
       key={puppy.id}

@@ -1,4 +1,6 @@
-export const puppies = [
+import { Puppy } from '../types';
+
+export const puppies: Puppy[] = [
   {
     id: 1,
     name: 'Frisket',
