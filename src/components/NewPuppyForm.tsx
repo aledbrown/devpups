@@ -1,9 +1,27 @@
-export function  NewPuppyForm() {
+import { Dispatch, SetStateAction } from "react";
+import { Puppy } from "../types";
+
+export function NewPuppyForm(
+  {
+    puppies: puppies,
+    setPuppies: setPuppies 
+  } : {
+    puppies: Puppy[];
+    setPuppies: Dispatch<SetStateAction<Puppy[]>>;
+  }) {
   return (
     <div className="mt-12 flex items-center justify-between bg-white p-8 shadow ring ring-black/5">
-      <form 
-        action = {(formData: FormData) => {
-            console.log(Object.fromEntries(formData));
+      <form
+        action={(formData: FormData) => {
+          const newPuppy: Puppy = {
+            id: puppies.length + 1,
+            name: formData.get('name') as string,
+            trait: formData.get('trait') as string,
+            imagePath: `/images/${puppies.length + 1}.jpg`,
+          };
+          // console.log(newPuppy)
+          // console.log(Object.fromEntries(formData));
+          setPuppies([...puppies, newPuppy]);
         }}
         // onSubmit={(e) => {
         //   e.preventDefault();
@@ -54,5 +72,5 @@ export function  NewPuppyForm() {
         </button>
       </form>
     </div>
-  )
+  );
 }
