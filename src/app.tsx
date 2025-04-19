@@ -9,6 +9,7 @@ import { NewPuppyForm } from "./components/NewPuppyForm";
 import { puppies as puppiesData } from "./data/puppies";
 import { useEffect, useState } from "react";
 import { Puppy } from "./types";
+import { LoaderCircle } from "lucide-react";
 
 export function App() {
   return (
@@ -53,33 +54,44 @@ function Main() {
 
 function ApiPuppies() {
   const [apiPuppies, setApiPuppies] = useState<[]>([]);
-  useEffect(
-    () => {
-      //Fetch puppies from an API
-      async function getPuppies() {
-        try {
-          const response = await fetch("http://devpups-api.test/api/puppies");
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const data = await response.json();
-          console.log(data);
-          setApiPuppies(data)
-        } catch (error) {
-          console.log(error);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    async function getPuppies() {
+      setIsLoading(true);
+      try {
+        const response = await fetch("http://devpups-api.test/api/puppies");
+        if (!response.ok) {
+          const errorData = await response.json();
+          setError(`${errorData.message}: ${errorData.details}`);
+          throw errorData;
         }
+        const data = await response.json();
+        setApiPuppies(data);
+      } catch (error) {
+        console.log(error);
       }
-      getPuppies();
-    },
-    [
-      // re-run the effect
-    ]
-  )
+      setIsLoading(false);
+    }
+
+    getPuppies();
+  }, []);
   return (
-    <div className="bg-white mt-12 p-6 shadow ring ring-black/5">
-      <pre>
-        {JSON.stringify(apiPuppies, null, 2)}
-      </pre>
+    <div className="mt-12 bg-white p-6 shadow ring ring-black/5">
+      {isLoading && <LoaderCircle className="animate-spin stroke-slate-300" />}
+      {apiPuppies.length > 0 && (
+        <pre>{JSON.stringify(apiPuppies, null, 2)}</pre>
+      )}
+      {error && <p className="text-red-500">{error}</p>}
+
+      {/*{isLoading ? (*/}
+      {/*  <LoaderCircle className="animate-spin stroke-slate-300" />*/}
+      {/*):(*/}
+      {/*  <pre>*/}
+      {/*  {JSON.stringify(apiPuppies, null, 2)}*/}
+      {/*</pre>*/}
+      {/*)}*/}
     </div>
   );
 }
