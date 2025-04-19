@@ -7,7 +7,7 @@ import { PuppiesList } from "./components/PuppiesList";
 import { NewPuppyForm } from "./components/NewPuppyForm";
 
 import { puppies as puppiesData } from "./data/puppies";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Puppy } from "./types";
 
 export function App() {
@@ -52,11 +52,34 @@ function Main() {
 }
 
 function ApiPuppies() {
-  // TODO: Fetch puppies from an API
-  
+  const [apiPuppies, setApiPuppies] = useState<[]>([]);
+  useEffect(
+    () => {
+      //Fetch puppies from an API
+      async function getPuppies() {
+        try {
+          const response = await fetch("http://devpups-api.test/api/puppies");
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          console.log(data);
+          setApiPuppies(data)
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      getPuppies();
+    },
+    [
+      // re-run the effect
+    ]
+  )
   return (
     <div className="bg-white mt-12 p-6 shadow ring ring-black/5">
-      
+      <pre>
+        {JSON.stringify(apiPuppies, null, 2)}
+      </pre>
     </div>
   );
 }
