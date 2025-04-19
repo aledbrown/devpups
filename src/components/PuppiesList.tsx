@@ -1,7 +1,6 @@
 import type { Puppy } from "../types";
 import { LikeToggle } from "./LikeToggle";
 import { Dispatch, SetStateAction } from "react";
-import { puppies } from "../data/puppies";
 
 export function PuppiesList({
   puppies,
