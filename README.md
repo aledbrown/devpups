@@ -7,5 +7,6 @@
 
 # Installed Bits
 - npm i lucide-react
+- npm i react-error-boundary
 
 > Dev Pups React app
