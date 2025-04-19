@@ -24,23 +24,39 @@ export function App() {
 }
 
 function Main() {
-  const [liked, setLiked] = useState<Puppy['id'][]>([]);
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [liked, setLiked] = useState<Puppy["id"][]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [puppies, setPuppies] = useState<Puppy[]>(puppiesData);
-  
+
   return (
     <main>
-{/*
+      {/*
       <pre>
         {JSON.stringify({liked, searchQuery}, null, 2)}
       </pre>
 */}
+      <ApiPuppies />
       <div className="mt-24 grid gap-8 sm:grid-cols-2">
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <Shortlist puppies={puppies} liked={liked} setLiked={setLiked} />
       </div>
-      <PuppiesList searchQuery={searchQuery} puppies={puppies} liked={liked} setLiked={setLiked} />
+      <PuppiesList
+        searchQuery={searchQuery}
+        puppies={puppies}
+        liked={liked}
+        setLiked={setLiked}
+      />
       <NewPuppyForm setPuppies={setPuppies} puppies={puppies} />
     </main>
-  )
+  );
+}
+
+function ApiPuppies() {
+  // TODO: Fetch puppies from an API
+  
+  return (
+    <div className="bg-white mt-12 p-6 shadow ring ring-black/5">
+      
+    </div>
+  );
 }
