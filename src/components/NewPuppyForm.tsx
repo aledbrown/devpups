@@ -19,7 +19,8 @@ export function NewPuppyForm({
             id: puppies.length + 1,
             name: formData.get("name") as string,
             trait: formData.get("trait") as string,
-            imagePath: `/images/${Math.floor(Math.random() * 16) + 7}.jpg`,
+            imageUrl: `/images/${Math.floor(Math.random() * 16) + 7}.jpg`,
+            likedBy: [1],
           };
           setPuppies([...puppies, newPuppy]);
         }}
@@ -74,7 +75,7 @@ function SubmitButton() {
       type="submit"
       disabled={status.pending}
     >
-      {status.pending ? `Adding ${status?.data?.get('name') || 'puppy'}...` : 'Add puppy' }
+      {status.pending ? `Adding ${status?.data?.get('name') || 'puppy'}...` : 'Add puppy'}
     </button>
   )
 }

@@ -3,15 +3,15 @@ import { LikeToggle } from "./LikeToggle";
 import { Dispatch, SetStateAction } from "react";
 
 export function PuppiesList({
+  searchQuery,
   puppies,
   liked,
   setLiked,
-  searchQuery,
 }: {
+  searchQuery: string;
   puppies: Puppy[];
   liked: Puppy["id"][];
   setLiked: Dispatch<SetStateAction<Puppy["id"][]>>;
-  searchQuery: string;
 }) {
   return (
     <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -23,13 +23,13 @@ export function PuppiesList({
           );
         })
         .map((puppy) => (
-        <PuppyCard
-          key={puppy.id}
-          puppy={puppy}
-          liked={liked}
-          setLiked={setLiked}
-        />
-      ))}
+          <PuppyCard
+            key={puppy.id}
+            puppy={puppy}
+            liked={liked}
+            setLiked={setLiked}
+          />
+        ))}
     </ul>
   );
 }
@@ -49,7 +49,7 @@ function PuppyCard({ puppy, liked, setLiked }: PuppyCardProps) {
       <img
         className="aspect-square object-cover"
         alt={puppy.name}
-        src={puppy.imagePath}
+        src={puppy.imageUrl}
       />
       <div className="gap flex items-center justify-between p-4 text-sm">
         <div className="flex items-center gap-2">
@@ -57,7 +57,7 @@ function PuppyCard({ puppy, liked, setLiked }: PuppyCardProps) {
           <span className="text-slate-300">·</span>
           <p className="text-slate-500">{puppy.trait}</p>
         </div>
-        <LikeToggle id={puppy.id} liked={liked} setLiked={setLiked} />
+        <LikeToggle puppy={puppy} />
       </div>
     </li>
   );
