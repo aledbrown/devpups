@@ -52,12 +52,14 @@ function DeleteButton({
     <button
       onClick={async () => {
         setPending(true);
+        // const updatedPuppy = await toggleLikedStatus(id);
+        // setPuppies(updatedPuppy); // works if API returns whole collection
         const updatedPuppy = await toggleLikedStatus(id);
         setPuppies((prevPups) => {
-          return prevPups.map((puppy) =>
-            puppy.id === updatedPuppy.id ? updatedPuppy : puppy,
+          return prevPups.map((existingPuppy) =>
+            existingPuppy.id === updatedPuppy.id ? updatedPuppy : existingPuppy,
           );
-        });
+        }); // works if api returns just the updated puppy
         setPending(false);
       }}
       className="group h-full border-l border-slate-100 px-2 hover:bg-slate-100"
