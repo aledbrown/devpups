@@ -51,7 +51,7 @@ function Main() {
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <Shortlist puppies={puppies} setPuppies={setPuppies} />
       </div>
-      <PuppiesList searchQuery={searchQuery} puppies={puppies} />
+      <PuppiesList searchQuery={searchQuery} puppies={puppies} setPuppies={setPuppies} />
       <NewPuppyForm puppies={puppies} setPuppies={setPuppies} />
     </main>
   );
