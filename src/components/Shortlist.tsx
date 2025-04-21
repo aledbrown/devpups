@@ -52,8 +52,6 @@ function DeleteButton({
     <button
       onClick={async () => {
         setPending(true);
-        // const updatedPuppy = await toggleLikedStatus(id);
-        // setPuppies(updatedPuppy); // works if API returns whole collection
         const updatedPuppy = await toggleLikedStatus(id);
         setPuppies((prevPups) => {
           return prevPups.map((existingPuppy) =>

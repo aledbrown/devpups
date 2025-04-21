@@ -16,9 +16,6 @@ export function LikeToggle({
       className="group"
       onClick={async () => {
         setPending(true);
-        // const newPuppies = await toggleLikedStatus(puppy.id);
-        // setPuppies(newPuppies);
-
         const updatedPuppy = await toggleLikedStatus(puppy.id);
         setPuppies((prevPups) => {
           return prevPups.map((existingPuppy) =>
