@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { Puppy } from "../types";
 import { useFormStatus } from "react-dom";
+import { createPuppy } from "../queries";
 
 
 export function NewPuppyForm({
@@ -14,15 +15,19 @@ export function NewPuppyForm({
     <div className="mt-12 flex items-center justify-between bg-white p-8 shadow ring ring-black/5">
       <form
         action={async (formData: FormData) => {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          const newPuppy: Puppy = {
-            id: puppies.length + 1,
-            name: formData.get("name") as string,
-            trait: formData.get("trait") as string,
-            imageUrl: `/images/${Math.floor(Math.random() * 16) + 7}.jpg`,
-            likedBy: [1],
-          };
+          
+          const newPuppy = await createPuppy(formData);
           setPuppies([...puppies, newPuppy]);
+          
+          // await new Promise((resolve) => setTimeout(resolve, 1000));
+          // const newPuppy: Puppy = {
+          //   id: puppies.length + 1,
+          //   name: formData.get("name") as string,
+          //   trait: formData.get("trait") as string,
+          //   imageUrl: `/images/${Math.floor(Math.random() * 16) + 7}.jpg`,
+          //   likedBy: [1],
+          // };
+          // setPuppies([...puppies, newPuppy]);
         }}
         className="mt-4 flex w-full flex-col items-start gap-4"
       >
@@ -47,16 +52,13 @@ export function NewPuppyForm({
               name="trait"
             />
           </fieldset>
-          <fieldset
-            disabled
-            className="col-span-2 flex w-full cursor-not-allowed flex-col gap-1 opacity-50"
-          >
-            <label htmlFor="avatar_url">Profile pic</label>
+          <fieldset className="col-span-2 flex w-full flex-col gap-1">
+            <label htmlFor="image_url">Profile pic</label>
             <input
               className="max-w-96 rounded-sm bg-white px-2 py-1 ring ring-black/20 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
-              id="avatar_url"
+              id="image_url"
               type="file"
-              name="avatar_url"
+              name="image_url"
             />
           </fieldset>
         </div>
