@@ -51,7 +51,7 @@ export async function createPuppy(formData: FormData) {
       const errorData = await response.json();
       throw errorData;
     }
-    const { data } = await response.json();
+    const data = await response.json();
     return data;
   } catch (error) {
     console.log(error);
