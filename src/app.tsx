@@ -5,9 +5,7 @@ import { Search } from "./components/Search";
 import { Shortlist } from "./components/Shortlist";
 import { PuppiesList } from "./components/PuppiesList";
 import { NewPuppyForm } from "./components/NewPuppyForm";
-
-import { puppies as puppiesData } from "./data/puppies";
-import { Suspense, use, useEffect, useState } from "react";
+import { Suspense, use, useState } from "react";
 import { Puppy } from "./types";
 import { LoaderCircle } from "lucide-react";
 import { getPuppies } from "./queries";
@@ -20,7 +18,9 @@ export function App() {
         <Header />
         <ErrorBoundary fallbackRender={({ error }) => (
           <div className="mt-12 bg-red-100 p-6 shadow ring ring-black/5">
-            <p className="text-red-500">Something went wrong: {error.message}</p>
+            <p className="text-red-500">
+              {error.message}: {error.details}
+            </p>
           </div>
         )}>
           <Suspense fallback={(
@@ -42,7 +42,6 @@ const puppyPromise = getPuppies();
 
 function Main() {
   const apiPuppies = use(puppyPromise);
-  const [liked, setLiked] = useState<Puppy["id"][]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [puppies, setPuppies] = useState<Puppy[]>(apiPuppies);
 
@@ -50,25 +49,10 @@ function Main() {
     <main>
       <div className="mt-24 grid gap-8 sm:grid-cols-2">
         <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <Shortlist puppies={puppies} liked={liked} setLiked={setLiked} />
+        <Shortlist puppies={puppies} setPuppies={setPuppies} />
       </div>
-      <PuppiesList
-        puppies={puppies}
-        liked={liked}
-        setLiked={setLiked}
-        searchQuery={searchQuery}
-      />
+      <PuppiesList searchQuery={searchQuery} puppies={puppies} />
       <NewPuppyForm puppies={puppies} setPuppies={setPuppies} />
     </main>
   );
 }
-
-
-// function ApiPuppies() {
-//   const apiPuppies = use(puppyPromise)
-//   return (
-//     <div className="mt-12 bg-green-100 p-6 shadow ring ring-black/5">
-//       <pre>{JSON.stringify(apiPuppies, null, 2)}</pre>
-//     </div>
-//   );
-// }
