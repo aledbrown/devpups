@@ -10,3 +10,4 @@
 - npm i react-error-boundary
 
 > Dev Pups React app
+> Need to run npm dev to start the dev server
